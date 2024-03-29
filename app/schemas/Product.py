@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 class ProductCreate(BaseModel):
+    parent_collection:int
     name:str
     description:str
     price:str

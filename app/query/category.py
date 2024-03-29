@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from app.schemas import CategoryCreate,CategoryUpdate
 from app.models import Category
 from app.registry import create,update,delete,get
+from app.exceptions import NotFoundError
 
 class CategoryService():
 
@@ -17,7 +18,13 @@ class CategoryService():
         return get(Category,self._db)
 
     def update_category(self,id:int,category:CategoryUpdate):
-        return update(Category,self._db,id,category.model_dump(exclude=None))
+        update_count=update(Category,self._db,id,category.model_dump(exclude=None))
+        if update_count<1:
+            raise NotFoundError
+        return None
 
     def delete_category(self,id:int):
-        return delete(Category,self._db,id)
+        delete_count=delete(Category,self._db,id)
+        if delete_count<1:
+            raise NotFoundError
+        return None

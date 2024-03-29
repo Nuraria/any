@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 from app.schemas import CollectionCreate,CollectionUpdate
 from app.models import Collection
-from app.registry import create,get_with_conditions,update,delete
+from app.registry import create,get_with_conditions,update,delete,get
+from app.exceptions import NotFoundError
 
 class CollectionService():
 
@@ -9,6 +10,15 @@ class CollectionService():
 
     def __init__(self,db:Session) -> None:
         self._db=db
+
+    def get_all_collections(self):
+        return get(Collection,self._db)
+    
+    def get_collection(self,id:int):
+        collection = get_with_conditions(Collection,self._db,{"id":id})
+        if collection is None:
+            raise NotFoundError
+        return collection
 
     def create_collection(self,collection:CollectionCreate):
         return create(Collection,self._db,collection)

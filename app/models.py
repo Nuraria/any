@@ -25,4 +25,5 @@ class Product(Base):
     parent_collection=Column(Integer,ForeignKey("collection.id"))
     price = Column(String(10))
     description = Column(String(250))
+    cordinates = Column(String(5))
     name = Column(String(70)) 
