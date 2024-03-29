@@ -6,7 +6,7 @@ from app.exceptions import NotFoundError
 
 
 
-router=APIRouter(prefix="/user")
+router=APIRouter(prefix="/user",tags=["user"])
 
 @router.post("/")
 def create(user:User,user_service:UserService=Depends(get_user_db)):

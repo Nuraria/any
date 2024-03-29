@@ -4,7 +4,7 @@ from app.schemas import Product,ProductCreate,ProductUpdate
 from app.query import ProductService
 from app.exceptions import NotFoundError
 
-router=APIRouter(prefix="/product")
+router=APIRouter(prefix="/product",tags=["product"])
 
 @router.post("/")
 def create(product:ProductCreate,product_service:ProductService=Depends(get_product_db)):
