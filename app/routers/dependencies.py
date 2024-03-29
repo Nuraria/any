@@ -20,7 +20,7 @@ def get_product_db(db:Session=Depends(get_db)):
     yield ProductService(db,get_collection_db(db,get_category_db(db)))
 
 def get_collection_db(db:Session=Depends(get_db)):
-    yield CollectionService(db,get_category_db(db))
+    yield CollectionService(db)
 
 
 

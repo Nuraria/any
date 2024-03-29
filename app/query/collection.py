@@ -9,11 +9,9 @@ from sqlalchemy.exc import IntegrityError
 class CollectionService():
 
     _db:Session
-    _category:CategoryService
 
-    def __init__(self,db:Session,category:CategoryService) -> None:
+    def __init__(self,db:Session,) -> None:
         self._db=db
-        self._category=category
 
     def get_all_collections(self):
         return get(Collection,self._db)
