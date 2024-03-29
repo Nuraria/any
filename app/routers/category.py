@@ -5,18 +5,18 @@ from app.query import CategoryService
 
 router=APIRouter(prefix="/category")
 
-@router.post("/create/")
+@router.post("/")
 def create(category:CategoryCreate,category_service:CategoryService=Depends(get_category_db)):
     return category_service.create_category(category)
 
-@router.patch("/update/{id}")
+@router.patch("/{id}")
 def update(category:CategoryUpdate,id:int,category_service:CategoryService=Depends(get_category_db)):
     return category_service.update_category(id,category)
 
-@router.get("/get/",response_model=list[Category])
+@router.get("/",response_model=list[Category])
 def get(category_service:CategoryService=Depends(get_category_db)):
     return category_service.get_category()
 
-@router.delete("/delete/")
+@router.delete("/")
 def delete(id:int,category_service:CategoryService=Depends(get_category_db)):
     return category_service.delete_category(id)

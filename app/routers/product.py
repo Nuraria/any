@@ -6,21 +6,21 @@ from app.exceptions import NotFoundError
 
 router=APIRouter(prefix="/product")
 
-@router.post("/create/")
+@router.post("/")
 def create(product:ProductCreate,product_service:ProductService=Depends(get_product_db)):
     try:
         return product_service.create_product(product)
     except NotFoundError:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Collection not found")
 
-@router.patch("/update/{id}")
+@router.patch("/{id}")
 def update(product:ProductUpdate,id:int,product_service:ProductService=Depends(get_product_db)):
     try:
         product_service.update_product(id,product)
     except NotFoundError:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Product not found")
 
-@router.get("/get/{collection_id}", response_model=list[Product])
+@router.get("/{collection_id}", response_model=list[Product])
 def get(collection_id:int,product_service:ProductService=Depends(get_product_db)):
     try:
         return  product_service.get_product_by_collection_id(collection_id)
@@ -28,7 +28,7 @@ def get(collection_id:int,product_service:ProductService=Depends(get_product_db)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Collection not found")
     
     
-@router.delete("/delete/{id}")
+@router.delete("/{id}")
 def delete(id:int,product_service:ProductService=Depends(get_product_db)):
     try:
         return  product_service.delete_product(id)
