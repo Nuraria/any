@@ -5,8 +5,9 @@ class ProductCreate(BaseModel):
     parent_collection:int
     name:str
     description:str
-    price:str
-    cordinates:str
+    price:int
+    positionx:float
+    positiony:float
 
 class Product(ProductCreate):
     id:int

@@ -16,11 +16,13 @@ def get_user_db(db:Session=Depends(get_db)):
 def get_category_db(db:Session=Depends(get_db)):
     yield CategoryService(db)
 
-def get_product_db(db:Session=Depends(get_db)):
-    yield ProductService(db,get_collection_db(db,get_category_db(db)))
+
 
 def get_collection_db(db:Session=Depends(get_db)):
     yield CollectionService(db)
+
+def get_product_db(db:Session=Depends(get_db),collection_service:CollectionService=Depends(get_collection_db)):
+    yield ProductService(db,collection_service)
 
 
 

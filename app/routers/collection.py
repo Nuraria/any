@@ -15,7 +15,7 @@ def get_all(collection_service:CollectionService=Depends(get_collection_db)):
     return collection_service.get_all_collections()
 
 @router.post("/")
-def create(file:Annotated[UploadFile,File()],category_id:Annotated[str,Form()],collection_service:CollectionService=Depends(get_collection_db)):
+def create(file:UploadFile,category_id:Annotated[str,Form()],collection_service:CollectionService=Depends(get_collection_db)):
     pure_name=re.sub(".*/","",file.filename)
     try:
         collection = collection_service.create_collection(CollectionCreate(img=pure_name,category_id=category_id))
@@ -35,6 +35,10 @@ def update(collection:CollectionUpdate,id:int,collection_service:CollectionServi
         raise HTTPException(status_code=status)
 
 @router.get("/{id}",response_model=list[Collection])
+def get(id:int,collection_service:CollectionService=Depends(get_collection_db)):
+    return collection_service.get_collection(id)
+
+@router.get("/category/{id}",response_model=list[Collection])
 def get(id:int,collection_service:CollectionService=Depends(get_collection_db)):
     return collection_service.get_collections_by_category(id)
 

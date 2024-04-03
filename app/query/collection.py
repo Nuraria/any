@@ -3,7 +3,6 @@ from app.schemas import CollectionCreate,CollectionUpdate
 from app.models import Collection
 from app.registry import create,get_with_conditions,update,delete,get
 from app.exceptions import NotFoundError
-from app.query import CategoryService
 from sqlalchemy.exc import IntegrityError
 
 class CollectionService():
