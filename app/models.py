@@ -26,4 +26,5 @@ class Product(Base):
     description = Column(Text)
     positionx=Column(Float)
     positiony=Column(Float)
-    name = Column(String(70)) 
+    name = Column(String(70))
+    img=Column(String(255)) 

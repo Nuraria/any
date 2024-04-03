@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends,HTTPException, status, UploadFile, File, Form
+from fastapi import APIRouter,Depends,HTTPException, status, UploadFile, Form
 from fastapi.responses import FileResponse
 from .dependencies import get_collection_db
 from app.schemas import Collection,CollectionCreate,CollectionUpdate

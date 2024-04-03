@@ -8,6 +8,7 @@ class ProductCreate(BaseModel):
     price:int
     positionx:float
     positiony:float
+    img:str
 
 class Product(ProductCreate):
     id:int
@@ -17,3 +18,4 @@ class ProductUpdate(BaseModel):
     description:Optional[str]=None
     price:Optional[str]=None
     cordinates:Optional[str]=None
+    img:Optional[str]=None
