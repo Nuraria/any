@@ -15,7 +15,12 @@ def create(table,db:Session,data:BaseModel):
     return new_row
 
 def update(table,db:Session,id:int,set:dict):
-    return db.query(table).filter_by(id=id).update(set)
+    num = db.query(table).filter_by(id=id).update(set)
+    db.commit()
+    return num
 
 def delete(table,db:Session,id:int):
-    return db.query(table).filter_by(id=id).delete()
+    
+    num = db.query(table).filter_by(id=id).delete()
+    db.commit()
+    return num
